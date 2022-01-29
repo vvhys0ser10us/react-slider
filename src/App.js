@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
-import { FaQuoteRight } from 'react-icons/fa'
+import SingleSlide from './singleSlide'
 import data from './data'
 function App() {
   const [people, setPeople] = useState(data)
@@ -34,7 +34,6 @@ function App() {
 
       <div className="section-center">
         {people.map((ppl, pplIndex) => {
-          const { id, name, image, title, quote } = ppl
           let position = 'nextSlide'
           if (
             pplIndex === index - 1 ||
@@ -45,15 +44,7 @@ function App() {
           if (index === pplIndex) {
             position = 'activeSlide'
           }
-          return (
-            <article className={position} key={id}>
-              <img src={image} alt={name} className="person-img" />
-              <h4>{name}</h4>
-              <p className="title">{title}</p>
-              <p className="text">{quote}</p>
-              <FaQuoteRight className="icon"></FaQuoteRight>
-            </article>
-          )
+          return <SingleSlide {...ppl} position={position}></SingleSlide>
         })}
         <button className="prev" onClick={() => setIndex(index - 1)}>
           <FiChevronLeft></FiChevronLeft>
